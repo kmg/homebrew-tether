@@ -4,18 +4,12 @@ class Tether < Formula
   version "0.1.0"
   license "MIT"
 
-  on_arm do
-    url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-aarch64-apple-darwin.tar.gz"
-    # sha256 will be filled after first release build
-    sha256 "PLACEHOLDER"
-  end
-
-  on_intel do
-    url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-x86_64-apple-darwin.tar.gz"
-    sha256 "PLACEHOLDER"
-  end
+  url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-aarch64-apple-darwin.tar.gz"
+  # sha256 will be filled after first release build
+  sha256 "362df125d8a2e750a521293d0fdf9ae9a2981575508a8f21dd5e4acd73471435"
 
   depends_on "tmux"
+  depends_on arch: :arm64
   depends_on :macos
 
   def install
@@ -42,7 +36,7 @@ class Tether < Formula
           exec "#{libexec}/bin/tether" stop
           ;;
         status)
-          exec "#{libexec}/bin/tether" pid 2>/dev/null && echo "Tether is running" || echo "Tether is not running"
+          "#{libexec}/bin/tether" pid 2>/dev/null && echo "Tether is running" || echo "Tether is not running"
           ;;
         remote)
           exec "#{libexec}/bin/tether" remote
