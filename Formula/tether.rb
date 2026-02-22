@@ -5,7 +5,7 @@ class Tether < Formula
   license "MIT"
 
   url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-aarch64-apple-darwin.tar.gz"
-  sha256 "2700e92c3a47760235d0bd7ad088d200bb8145642715c0632e87926e474b1b2c"
+  sha256 "bd130be3941646f01f8a06a56c98f9546e5d119958fae2f9564d92bc7e41f361"
 
   depends_on "tmux"
   depends_on arch: :arm64
