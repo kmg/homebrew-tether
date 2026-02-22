@@ -1,11 +1,11 @@
 class Tether < Formula
   desc "Mobile tmux monitor with Claude Code activity detection"
   homepage "https://github.com/kmg/tether"
-  version "0.1.3"
+  version "0.1.4"
   license "MIT"
 
   url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-aarch64-apple-darwin.tar.gz"
-  sha256 "38993d7ca51e5dfa39f76ecc8517f5ce7f0d329be37594d9109cfca06f9c8e65"
+  sha256 "94fd4096b5928a6838c56f3caa6fae9b29f22df5ca12144bb22550638f724b2b"
 
   depends_on "tmux"
   depends_on arch: :arm64
@@ -79,15 +79,19 @@ class Tether < Formula
 
         brew services start tether
 
+      Configure via env file (no shell profile edits needed):
+
+        ~/.local/share/tether/env
+
       For push notifications, generate VAPID keys:
 
         tether remote
         iex> Tether.Notifier.generate_vapid_keys()
 
-      Then set in your environment:
+      Then add to your env file:
 
-        export VAPID_PUBLIC_KEY=...
-        export VAPID_PRIVATE_KEY=...
+        VAPID_PUBLIC_KEY=...
+        VAPID_PRIVATE_KEY=...
 
       Data is stored in: ~/.local/share/tether/
       Logs (when using brew services): #{var}/log/tether.log
