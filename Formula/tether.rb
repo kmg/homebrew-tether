@@ -8,6 +8,7 @@ class Tether < Formula
   sha256 "f70283f252c05e54ea7b376ecd63f265763622a9c55b1ecdec583f31ebe4a2fc"
 
   depends_on "tmux"
+  depends_on "tailscale" => :optional
   depends_on arch: :arm64
   depends_on :macos
 
