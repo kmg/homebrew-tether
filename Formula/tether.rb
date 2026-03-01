@@ -1,11 +1,11 @@
 class Tether < Formula
   desc "Mobile tmux monitor with Claude Code activity detection"
   homepage "https://github.com/kmg/tether"
-  version "0.1.16"
+  version "0.1.17"
   license "MIT"
 
   url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-aarch64-apple-darwin.tar.gz"
-  sha256 "24f5b9620527f52022dde5e6ff24de7a57bdebd5014403b5423154342e7ee0ff"
+  sha256 "3ff37504c0b6c933e90a636aa726ae8828b4e1158fc83609d91e5a8883ed1fab"
 
   depends_on "tmux"
   depends_on arch: :arm64
