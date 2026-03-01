@@ -1,11 +1,11 @@
 class Tether < Formula
   desc "Mobile tmux monitor with Claude Code activity detection"
   homepage "https://github.com/kmg/tether"
-  version "0.1.12"
+  version "0.1.13"
   license "MIT"
 
   url "https://github.com/kmg/tether/releases/download/v#{version}/tether-#{version}-aarch64-apple-darwin.tar.gz"
-  sha256 "b5126a076b53078af387141a601c4a0d2b990f2b94425f5df306e92a9819fb8b"
+  sha256 "859ec282ff81670c82dc4e57ea5b17793a528ce3cc2c05efbe70d6a426c77364"
 
   depends_on "tmux"
   depends_on arch: :arm64
@@ -40,19 +40,23 @@ class Tether < Formula
         remote)
           exec "#{libexec}/bin/tether" remote
           ;;
+        setup-push)
+          exec "#{libexec}/bin/tether" eval 'keys = Tether.Notifier.generate_vapid_keys(); IO.puts("VAPID_PUBLIC_KEY=#{keys.public_key}\nVAPID_PRIVATE_KEY=#{keys.private_key}")'
+          ;;
         version)
           echo "Tether v#{version}"
           ;;
         *)
-          echo "Usage: tether {start|daemon|stop|status|remote|version}"
+          echo "Usage: tether {start|daemon|stop|status|remote|setup-push|version}"
           echo ""
           echo "Commands:"
-          echo "  start    Start Tether in the foreground"
-          echo "  daemon   Start Tether as a background daemon"
-          echo "  stop     Stop a running daemon"
-          echo "  status   Check if Tether is running"
-          echo "  remote   Attach a remote IEx shell"
-          echo "  version  Print version"
+          echo "  start       Start Tether in the foreground"
+          echo "  daemon      Start Tether as a background daemon"
+          echo "  stop        Stop a running daemon"
+          echo "  status      Check if Tether is running"
+          echo "  remote      Attach a remote IEx shell"
+          echo "  setup-push  Generate VAPID keys for push notifications"
+          echo "  version     Print version"
           exit 1
           ;;
       esac
@@ -85,13 +89,8 @@ class Tether < Formula
 
       For push notifications, generate VAPID keys:
 
-        tether remote
-        iex> Tether.Notifier.generate_vapid_keys()
-
-      Then add to your env file:
-
-        VAPID_PUBLIC_KEY=...
-        VAPID_PRIVATE_KEY=...
+        tether setup-push >> ~/.local/share/tether/env
+        brew services restart tether
 
       Data is stored in: ~/.local/share/tether/
       Logs (when using brew services): #{var}/log/tether.log
