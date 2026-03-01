@@ -41,7 +41,7 @@ class Tether < Formula
           exec "#{libexec}/bin/tether" remote
           ;;
         setup-push)
-          exec "#{libexec}/bin/tether" eval 'keys = Tether.Notifier.generate_vapid_keys(); IO.puts("VAPID_PUBLIC_KEY=#{keys.public_key}\nVAPID_PRIVATE_KEY=#{keys.private_key}")'
+          exec "#{libexec}/bin/tether" eval 'keys = Tether.Notifier.generate_vapid_keys(); IO.puts("VAPID_PUBLIC_KEY=\#{keys.public_key}\nVAPID_PRIVATE_KEY=\#{keys.private_key}")'
           ;;
         version)
           echo "Tether v#{version}"
